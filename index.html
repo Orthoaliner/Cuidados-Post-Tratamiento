@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía de cuidados post-tratamiento — Orthoaliner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    background: #EAF3F8;
+    color: #1A3A5C;
+  }
+  .wrap {
+    width: 100%;
+    max-width: 1320px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #EAF3F8;
+  }
+  .header {
+    background: #FFFFFF;
+    padding: 26px 24px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    border-bottom: 3px solid #1C8C74;
+  }
+  .header img {
+    height: 86px;
+    width: auto;
+  }
+  .selector {
+    padding: 24px 20px 8px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .selector p {
+    margin: 0;
+    font-size: 14px;
+    color: #28506F;
+    text-align: center;
+    max-width: 480px;
+  }
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 760px;
+  }
+  .pill {
+    padding: 11px 18px;
+    border-radius: 999px;
+    border: 1.5px solid #1A3A5C;
+    background: #FFFFFF;
+    color: #1A3A5C;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    min-height: 44px;
+    font-family: inherit;
+    transition: background 0.15s, color 0.15s;
+  }
+  .pill:hover {
+    background: #D7EAEE;
+  }
+  .pill.active {
+    background: #1A3A5C;
+    color: #FFFFFF;
+  }
+  .content {
+    flex: 1;
+    padding: 20px 20px 48px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .care-section {
+    width: 100%;
+    max-width: 640px;
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .care-section.active {
+    display: flex;
+  }
+  .care-section h2 {
+    margin: 4px 0 0 0;
+    font-size: 19px;
+    font-weight: 700;
+    color: #1C8C74;
+    text-align: center;
+  }
+  .care-section img {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(26,58,92,0.15);
+    display: block;
+  }
+  .care-section .footer-note {
+    margin: 8px 0 0 0;
+    font-size: 13px;
+    color: #28506F;
+    text-align: center;
+  }
+  .placeholder {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    padding: 40px 20px;
+    color: #5A7A95;
+  }
+  .placeholder p {
+    margin: 0;
+    font-size: 14px;
+  }
+  footer {
+    padding: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: #5A7A95;
+    border-top: 1px solid #D7E6EE;
+    background: #FFFFFF;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <img src="./assets/6512fea0e0e7b5d35b9608f3efedc472.png" alt="Orthoaliner">
+  </div>
+
+  <div class="selector">
+    <p>Elige el procedimiento que te realizaron para ver tus indicaciones:</p>
+    <div class="pills" id="pill-container">
+      <!-- Los botones se generan automáticamente -->
+    </div>
+  </div>
+
+  <div class="content" id="content-container">
+    <div id="placeholder" class="placeholder">
+      <p>Selecciona arriba el tratamiento que te realizaron para ver tus cuidados.</p>
+    </div>
+  </div>
+
+  <footer>
+    Orthoaliner · Zapotlanejo, Jalisco
+  </footer>
+
+</div>
+
+<script>
+  const treatments = [
+    { 
+      id: 'cirugia', 
+      label: 'Cirugía', 
+      cover: './assets/6dce49ae0bd6765c67d088299c6b2797.jpg', 
+      detail: './assets/d0f85411c4f5438074742dae8705f271.jpg' 
+    },
+    { 
+      id: 'endodoncia', 
+      label: 'Endodoncia', 
+      cover: './assets/cb20d66156b7a90beab426b00cb6156d.jpg', 
+      detail: './assets/e433cf66b0f7c045dba4e138917a4acd.jpg' 
+    },
+    { 
+      id: 'implante', 
+      label: 'Implante', 
+      cover: './assets/42f3448bcb670b8e6d53de42613367d0.jpg', 
+      detail: './assets/44cc556095143e0e88f4b98472476518.jpg' 
+    },
+    { 
+      id: 'resina', 
+      label: 'Obturación de Resina', 
+      cover: './assets/936676a3e9ceee785a478514c7bbb6a0.jpg', 
+      detail: './assets/8d4d4c33b37abb1d13780f19913336eb.jpg' 
+    },
+    { 
+      id: 'ortodoncia', 
+      label: 'Ortodoncia', 
+      cover: './assets/565400a65ce5ec0aaed94724c2915e84.jpg', 
+      detail: './assets/88fb86996be5ac0a9d5a48d68ebc2bb1.jpg' 
+    }
+  ];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const pillContainer = document.getElementById('pill-container');
+    const contentContainer = document.getElementById('content-container');
+    const placeholder = document.getElementById('placeholder');
+    
+    let activeSection = null;
+
+    treatments.forEach(t => {
+      const btn = document.createElement('button');
+      btn.className = 'pill';
+      btn.textContent = t.label;
+      
+      const section = document.createElement('div');
+      section.className = 'care-section';
+      section.id = `section-${t.id}`;
+      section.innerHTML = `
+        <h2>Cuidados — ${t.label}</h2>
+        <img src="${t.cover}" alt="Cuidados después de ${t.label} — portada">
+        <img src="${t.detail}" alt="Cuidados después de ${t.label} — indicaciones">
+        <p class="footer-note">¿Dudas o molestias fuera de lo indicado? Escríbenos, estamos para ayudarte.</p>
+      `;
+      contentContainer.appendChild(section);
+
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.care-section').forEach(s => s.classList.remove('active'));
+
+        if (activeSection === t.id) {
+          placeholder.style.display = 'block';
+          activeSection = null;
+        } else {
+          btn.classList.add('active');
+          section.classList.add('active');
+          placeholder.style.display = 'none';
+          activeSection = t.id;
+        }
+      });
+
+      pillContainer.appendChild(btn);
+    });
+  });
+</script>
+</body>
+</html>
